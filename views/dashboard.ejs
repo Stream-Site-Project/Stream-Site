@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="select_movie" method="get" action="/getMovie">
+        <input  id="movie" type="hidden" name="movie" value="">
+        <div class="video-section" id="samplee">first movie</div>
+        <div class="video-section" id="video">Second movie</div>
+    </form>
+    <ul>
+        <% movieList.forEach( function(movie) { %>
+            <li> <%= movie %> </li>
+        <% }); %>
+    </ul>
+    
+    <script>
+        var movie_name = document.getElementById("movie");
+        $('.video-section').bind('click',function(){
+            var movie_id =  $(this).attr('id');
+            console.log(movie_id);
+            movie_name.value = movie_id;
+            document.getElementById('select_movie').submit();
+        });
+    </script>
+</body>
+</html>
