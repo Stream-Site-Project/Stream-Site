@@ -3,8 +3,10 @@ const fs = require('fs'); // File Stream Package
 const path = require('path');// for traversing the file system
 
 
-router.route("/").get((req,res) => {
-    const moviepath = "assets/sample.mp4"
+router.route("/:id").get((req,res) => {
+    const id = req.params.id
+    console.log(id);
+    const moviepath = `assets/${id}`
 
     try{
         const moviestats = fs.statSync(moviepath)

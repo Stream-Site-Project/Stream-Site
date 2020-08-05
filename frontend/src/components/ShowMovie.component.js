@@ -16,12 +16,14 @@ export default class ShowMovie extends React.Component{
     }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/movie/")
+        console.log("Requesting")
+        axios.get("http://localhost:5000/movie/findall")
             .then((response) => {
-
                 this.setState({
                     movies : response.data.map(movie => movie)
                 })
+                //console.log("got the movies.")
+                //console.log(response)
             })
             .catch((err) => {
                 console.log("error",err)

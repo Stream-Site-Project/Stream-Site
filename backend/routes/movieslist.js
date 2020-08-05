@@ -1,16 +1,20 @@
 const router = require('express').Router();
 const Movies = require('../models/movieschema.model');
 
-router.route('/').get( (req, res) => {
+router.route('/findall').get( (req, res) => {
     Movies.find()
         .then(movies => res.json(movies))
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
-router.route('/:name/:id').get( (req, res) =>{
-    Movies.find({movieshowId: req.params.id ,movieshowName: req.params.name})
-        .then(movies => res.json(movies))
-        .catch(err => res.status(404).json('Error: ' + err))
+router.route('/find/:id').get( (req, res) =>{
+    try{
+        Movies.find({_id: req.params.id})
+            .then(movies => res.json(movies))
+            .catch(err => res.status(404).json('Error: ' + err))
+    }catch(ex){
+        console.ex("wrong id gandu!!!")
+    }
 });
 
 router.route('/upload').post( (req, res) =>{

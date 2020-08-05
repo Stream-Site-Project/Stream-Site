@@ -18,6 +18,10 @@ const moviesSchema = new Schema({
         type: Array,
         required: true
     },
+    moviePoster:{
+        type:String,
+        required:true
+    },
     movieshowAddedby: {
         type: String,
         required: true
