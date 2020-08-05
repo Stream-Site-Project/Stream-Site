@@ -1,20 +1,30 @@
 import React from 'react';
 import './App.css';
-import './components/UpdateMovie.component';
-import UploadMovie from './components/UpdateMovie.component';
-import UserLogin from './components/UserLogin.component';
-import Test from './components/test';
-import RenderMovie from './components/RenderMovie.component';
 import Cookies from 'universal-cookie';
 import { Redirect,Route,BrowserRouter as Router } from 'react-router-dom';
+
+
+import UploadMovie from './components/UpdateMovie.component';
+import UserLogin from './components/UserLogin.component';
+import RenderMovie from './components/RenderMovie.component';
+import Navbar from './components/Navbar.component';
+import ShowMovies from './components/ShowMovie.component';
+
+
+
+
 
 function App() {
   return (
     <Router>
       <div>
-        <RenderMovie />
+        <Navbar />
+
+        <br/>
         <Route path="/login" component={UserLogin}/>
-        <Route path="/movie" component={UploadMovie}/>
+        <Route path="/uploadMovie" component={UploadMovie}/>
+        <Route path="/playvideo" component={RenderMovie} />
+        <Route path="/showmovies" component={ShowMovies} />
       </div>
     </Router>
     

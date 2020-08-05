@@ -1,8 +1,5 @@
 import React from "react";
 
-import VideoPlayer from "react-video-js-player";
-import Vid from './sample.mp4';
-
 export default class RenderMovie extends React.Component{
     constructor(){
         super()
