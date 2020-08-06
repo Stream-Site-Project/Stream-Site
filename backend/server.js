@@ -15,7 +15,7 @@ app.use(requestIp.mw());
 app.use(expressip().getIpInfoMiddleware);
 
 const uri = process.env.ATLAS_URI_SERVER;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,useUnifiedTopology: true});
 
 const connection = mongoose.connection;
 connection.once('open', () =>{
@@ -27,6 +27,8 @@ const userSignUp = require('./routes/usersignup');
 const userprofile = require('./routes/userprofile');
 const searchprofile = require('./routes/searchprofile');
 const videoquery = require('./routes/videoQuery');
+const getPoster = require('./routes/getPoster');
+const userLogin = require('./routes/userLogin');
 
 app.use('/', moviepage);
 app.use('/signup', userSignUp);
@@ -34,6 +36,8 @@ app.use('/myprofile', userprofile);
 app.use('/search',searchprofile);
 app.use('/movie', moviepage);
 app.use('/video', videoquery);
+app.use('/getPoster', getPoster);
+app.use('/login',userLogin);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

@@ -22,10 +22,12 @@ export default class Movie extends React.Component{
     }
 
     handleClick(event){
-        const {id} =  event.target
+        
         console.log("Clicked!")
-        //console.log(id)
-        const urll= `http://localhost:5000/movie/find/${id}`
+        console.log(event.target.tagName)
+        const id  =  event.target.id
+        console.log(id)
+        const urll= `http://localhost:5000/movie/find/id/${id}`
         //console.log(urll)
         axios.get(urll)
             .then((res) =>{
@@ -36,7 +38,7 @@ export default class Movie extends React.Component{
                 })
             })
             .catch((err) =>{
-                console.log("(-)Error\n",err)
+                console.log("(-)Error \n",err)
             })
         
     }
@@ -50,14 +52,23 @@ export default class Movie extends React.Component{
                 state:{movie: this.state.movie} 
             }}/>
         }else{
+            console.log(this.state.movie)
+            const picSrc = `http://localhost:5000/getPoster/${this.props.movie.moviePoster}`
             return(
-                
-                <div className="movie-component" id={String(this.props.movie._id)} onClick={this.handleClick}>
-                    <p>{this.props.movie.movieshowName}</p>
-                    <p>{this.props.movie.movieshowURL[0]}</p>
-                    <p>{this.props.movie.moviePoster}</p>
-                    <p>{this.props.movie._id}</p>
-                </div>
+                // here the event should be made to be generated for the entire div ,
+                // but here the event is only for the button
+                <div className="card"  >
+                    <img className="card-img-top" src={picSrc} alt="Card image cap"/>
+                    <div className="card-body">
+                        <h5 className="card-title">{this.props.movie.movieshowName}</h5>
+                        <p className="card-text">{this.props.movie.movieDescription}</p>
+                        <p>{this.props.movie._id}</p>
+                        <button className="btn btn-primary" 
+                            id={this.props.movie._id}
+                            onClick={this.handleClick}
+                        >   Watch</button>
+                    </div>
+                </div> 
             )
         }
     }

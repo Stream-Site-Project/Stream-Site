@@ -2,22 +2,41 @@ const router = require('express').Router();
 const Movies = require('../models/movieschema.model');
 
 router.route('/findall').get( (req, res) => {
+    //this API endpoint should not be used.
     Movies.find()
         .then(movies => res.json(movies))
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
-router.route('/find/:id').get( (req, res) =>{
+router.route('/find/id/:id').get( (req, res) =>{
+    //this is to find the specific movie
     try{
         Movies.find({_id: req.params.id})
             .then(movies => res.json(movies))
             .catch(err => res.status(404).json('Error: ' + err))
     }catch(ex){
-        console.ex("wrong id gandu!!!")
+        console.ex("(-)No Param at the ID, check 11:movieList.js")
     }
 });
 
+
+router.route('/find/genre/:genre').get( (req,res) => {
+    //it returns the movies based on their genre.
+    const genre = req.params.genre;
+    //console.log(genre)
+    try{
+        Movies.find({ movieshowTags: genre })
+            .then(movies => res.json(movies))
+            .catch(err => res.status(404).json('Error: ' + err))
+    }catch(ex){
+        console.log("(-)No genre at the ID, check 23:movieList.js")
+    }
+})
+
+
+
 router.route('/upload').post( (req, res) =>{
+    //this is for uploading, should not be used.
     const ipInfo = req.ipInfo;
 
     const movieshowName = req.body.movieshowName;
@@ -25,12 +44,15 @@ router.route('/upload').post( (req, res) =>{
     const movieCast = req.body.movieCast;
     const movieshowURL = req.body.movieshowURL;
     const movieshowAddedby = req.body.movieshowAddedby;
+
     const movieshowAddedIp = req.clientIp;
     const movieshowAddedLocation = ipInfo.city + "," + ipInfo.country;
+
+    const moviePoster = req.body.moviePoster;
     const movieshowTags = req.body.movieshowTags;
     const movieshowIMDBReview = req.body.movieshowIMDBReview;
 
-    const newUser = new Movies({movieshowName, movieDescription, movieCast, movieshowURL, movieshowAddedby, movieshowAddedIp, movieshowAddedLocation, movieshowTags, movieshowIMDBReview});
+    const newUser = new Movies({movieshowName, movieDescription, movieCast, movieshowURL, movieshowAddedby, movieshowAddedIp, movieshowAddedLocation, moviePoster, movieshowTags, movieshowIMDBReview});
     newUser.save()
         .then( () => res.json('Movie Added'))
         .catch( err => res.status(400).json('Error '+ err));

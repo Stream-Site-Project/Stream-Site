@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import OwlCarousel from 'react-owl-carousel';
+import '../OwlCarousel2-2.3.4/dist/assets/owl.carousel.css';
+import '../OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 
@@ -11,31 +14,54 @@ export default class ShowMovie extends React.Component{
     constructor(){
         super()
         this.state = {
-            movies: []
+            movies: [],
+            thrillerMovies :[],
+            dramaMovies: []
         }
     }
 
     componentDidMount(){
-        console.log("Requesting")
-        axios.get("http://localhost:5000/movie/findall")
-            .then((response) => {
+        console.log("Requesting...")
+        // for finding all the movies.
+        const AllMovies = axios.get("http://localhost:5000/movie/findall");
+        const ThrillerMovies = axios.get("http://localhost:5000/movie/find/genre/thriller");
+        const DramaMovies = axios.get("http://localhost:5000/movie/find/genre/drama");
+       
+
+        axios.all([AllMovies,ThrillerMovies,DramaMovies])
+            .then(axios.spread((...response) =>{
+                const respAll = response[0]
+                const respThriller = response[1]
+                const respDrama = response[2]
+
+                //console.log(respAll)
+                //console.log(respThriller)
+                //console.log(respDrama)
                 this.setState({
-                    movies : response.data.map(movie => movie)
+                    movies : respAll.data.map(movie => movie),
+                    thrillerMovies : respThriller.data.map(movie => movie),
+                    dramaMovies : respDrama.data.map(movie => movie)
                 })
-                //console.log("got the movies.")
-                //console.log(response)
-            })
-            .catch((err) => {
-                console.log("error",err)
+            })).catch((err) =>{
+                console.log(err)
             })
     }
     render(){
-        const compoArray = this.state.movies.map(movie => {
+        const totalMovies = this.state.movies.map(movie => {
+            return <Movie key={movie._id} movie={movie} />
+        })
+        const thrillerMovies = this.state.thrillerMovies.map(movie => {
+            return <Movie key={movie._id} movie={movie} />
+        })
+        const dramaMovies = this.state.dramaMovies.map(movie => {
             return <Movie key={movie._id} movie={movie} />
         })
         return(
+            // Here the owl crousel should be made.
             <div>
-                {compoArray}
+                {totalMovies}
+                {thrillerMovies}
+                {dramaMovies}
             </div>
         )
     }
