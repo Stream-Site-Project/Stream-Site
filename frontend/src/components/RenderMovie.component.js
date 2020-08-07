@@ -5,8 +5,8 @@ export default class RenderMovie extends React.Component{
         super(props)
         this.state = {
             movieName : this.props.location.state.movie[0].movieshowName,
-            movieURL : "http://localhost:5000/video" + this.props.location.state.movie[0].movieshowURL[0],
-            moviePoster: this.props.location.state.movie[0].moviePoster
+            movieURL : "http://localhost:5000/video/" + this.props.location.state.movie[0].movieshowURL[0],
+            moviePoster: "http://localhost:5000/getPoster/" + this.props.location.state.movie[0].moviePoster
         }
     }
     render(){
