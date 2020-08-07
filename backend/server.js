@@ -27,6 +27,7 @@ const userSignUp = require('./routes/usersignup');
 const userprofile = require('./routes/userprofile');
 const searchprofile = require('./routes/searchprofile');
 const videoquery = require('./routes/videoQuery');
+const userLogin = require('./routes/userLogin');
 
 app.use('/', moviepage);
 app.use('/signup', userSignUp);
@@ -34,6 +35,7 @@ app.use('/myprofile', userprofile);
 app.use('/search',searchprofile);
 app.use('/movie', moviepage);
 app.use('/video', videoquery);
+app.use('/login', userLogin);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

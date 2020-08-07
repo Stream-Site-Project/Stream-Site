@@ -29,6 +29,7 @@ export default class UserLogin extends React.Component{
             .then((response) => {
                 // for data access response.data.variable
                 cookies.set('userid',response.data.id)
+                cookies.set('userLogged', true)
                 window.location="/movie"
             })
             .catch((err) => {
@@ -63,6 +64,7 @@ export default class UserLogin extends React.Component{
                     </span>
                     <button>submit</button>
                 </form>
+                <Link to="/signup"><button>Sign Up</button></Link>
                 <p>{this.state.username}<br />{this.state.password}</p>
             </div>
         )

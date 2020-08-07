@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let user = require("../models/user.model");
+const bcrypt = require("bcryptjs");
 
 router.route("/").post((req,res) => {
     const username = req.body.username;
@@ -24,7 +25,7 @@ router.route("/").post((req,res) => {
         and then the respose as 500
     */
     user.findOne({username:username})
-        .then(result => {
+        .then(async (result) => {
             //console.log(result)
             
             if(result === null){ 
@@ -35,18 +36,17 @@ router.route("/").post((req,res) => {
                 }) 
             }
             
-            if (password === result.userPassword){
-                //if the username and password matched
+            const validatePass = await bcrypt.compare(req.body.password ,result.userPassword);
+            if(!validatePass){
+                res.send({
+                    "isUser":true,
+                    "isCC":false
+                })
+            }else{
                 res.send({
                     "isUser":true,
                     "isCC":true,
                     "user_id":result._id
-                })
-            }else{
-                //in this case password dosent match to the given username
-                res.send({
-                    "isUser":true,
-                    "isCC":false
                 })
             }
         })
