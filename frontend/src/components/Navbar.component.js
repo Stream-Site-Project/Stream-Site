@@ -54,6 +54,9 @@ export default class Navbar extends React.Component{
                                 <Link className="nav-link" to="/uploadmovie">Upload Movie</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/signup">Sign Up</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/showmovies">DashBoard</Link>
                             </li>
                         </ul>
@@ -62,7 +65,7 @@ export default class Navbar extends React.Component{
                                 {logOut}
                             </li>
                         </ul>
-                    </div>
+                        </div>
                 </nav>
             </div>
         )

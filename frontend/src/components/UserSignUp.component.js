@@ -32,7 +32,7 @@ export default class UserSignUp extends Component{
 
         axios.get(url)
              .then(response => {
-                 if(name == "username"){
+                 if(name === "username"){
                     if(response.data.isUser){
                         this.setState({
                             isUsernameOk: "Username Not Available"
@@ -42,10 +42,10 @@ export default class UserSignUp extends Component{
                             isUsernameOk: ""
                         })
                     }
-                 }else if(name == "userEmail"){
+                 }else if(name === "userEmail"){
                     if(response.data.isEmailRegistered){
                         this.setState({
-                            isEmailOk: "Email Already Registered"
+                            isEmailOk: "Email Already Registered!"
                         })
                     }else{
                         this.setState({
@@ -57,11 +57,11 @@ export default class UserSignUp extends Component{
              })
              .catch((err) =>{
                 //console.log("(-)Error\n",err)
-                if(name == "username"){
+                if(name === "username"){
                     this.setState({
                         isUsernameOk: ""
                     })
-                }else if(name == "userEmail"){
+                }else if(name === "userEmail"){
                     this.setState({
                         isEmailOk: ""
                     })
@@ -72,7 +72,7 @@ export default class UserSignUp extends Component{
 	handleChange(e){
         const {name, value, type, checked} = e.target
         
-        if(type == "checkbox"){
+        if(type === "checkbox"){
             this.setState({
                 userAgree: checked
             })
@@ -138,7 +138,7 @@ export default class UserSignUp extends Component{
                         window.location = '/login'
                     }
                     else{
-                        console.log("Registration Failed")
+                        console.log("Registration Failed, please try after some time.")
                     }    
                 })
                 .catch(err => console.log(err))

@@ -1,8 +1,5 @@
 import React from "react";
 import axios from "axios";
-import OwlCarousel from 'react-owl-carousel';
-import '../OwlCarousel2-2.3.4/dist/assets/owl.carousel.css';
-import '../OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 
@@ -16,8 +13,10 @@ export default class ShowMovie extends React.Component{
         this.state = {
             movies: [],
             thrillerMovies :[],
-            dramaMovies: []
+            dramaMovies: [],
+            searchFilter: ""
         }
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     componentDidMount(){
@@ -46,8 +45,27 @@ export default class ShowMovie extends React.Component{
                 console.log(err)
             })
     }
+
+    handleSearch(event){
+        this.setState({
+            searchFilter: event.target.value
+        })
+    }
+
+
     render(){
-        const totalMovies = this.state.movies.map(movie => {
+
+        //here we need to filter the movies.
+        const filtolM = this.state.movies.filter(movie =>{
+            return movie.movieshowName.indexOf(this.state.searchFilter) !== -1
+        })
+
+
+
+
+
+        // these are the components that go on the screen with there details.
+        const totalMovies = filtolM.map(movie => {
             return <Movie key={movie._id} movie={movie} />
         })
         const thrillerMovies = this.state.thrillerMovies.map(movie => {
@@ -59,8 +77,14 @@ export default class ShowMovie extends React.Component{
         return(
             // Here the owl crousel should be made.
             <div>
+                <input type="text" value={this.state.searchFilter} placeholder="Search Movie" onChange={this.handleSearch}/>
+                <h3>All Movies</h3>
                 {totalMovies}
+                <br />
+                <h3>Thriller Movies</h3>
                 {thrillerMovies}
+                <br />
+                <h3>Drama Movies</h3>
                 {dramaMovies}
             </div>
         )

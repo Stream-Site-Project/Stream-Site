@@ -3,7 +3,7 @@ let user = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 
 router.route("/").post((req,res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
     /*
@@ -24,7 +24,7 @@ router.route("/").post((req,res) => {
         log the error in the server
         and then the respose as 500
     */
-    user.findOne({username:username})
+    user.findOne({userEmail:email})
         .then(async (result) => {
             //console.log(result)
             
@@ -36,7 +36,7 @@ router.route("/").post((req,res) => {
                 }) 
             }
             
-            const validatePass = await bcrypt.compare(req.body.password ,result.userPassword);
+            const validatePass = await bcrypt.compare(password,result.userPassword);
             if(!validatePass){
                 res.send({
                     "isUser":true,

@@ -9,7 +9,7 @@ export default class UserLogin extends React.Component{
     constructor(){
         super()
         this.state = {
-            username : "",
+            email : "",
             password : ""
         }
         this.handler = this.handler.bind(this)
@@ -38,36 +38,50 @@ export default class UserLogin extends React.Component{
     }
     render(){
         return (
-            <div>
-                <h1>Login</h1>
-                <form onSubmit={this.handleSubmit}> 
-                    <span>
-                        <label>Email</label>
-                        <input 
-                            type="text" 
-                            name="username" 
-                            value={this.state.username}
-                            onChange={this.handler}
-                            required
-                        />
-                    </span>
-                    <br />
-                    <span>
-                        <label>password</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            value={this.state.password}
-                            onChange={this.handler}
-                            required
-                        />
-                    </span>
-                    <button>submit</button>
-                </form>
-                <Link to="/signup"><button>Sign Up</button></Link>
-                <p>{this.state.username}<br />{this.state.password}</p>
+            <div className="container myCtn">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="col-md-12">
+                            <h2 className="text-center mt-3">Log in</h2>
+                            <form onSubmit={this.handleSubmit} id="contact-form" className="main-form needs-validation" role="form" noValidate>
+
+                                <div className="form-group">
+                                    <label>
+                                        <input type="text" id="form_email" name="email" className="my_form-control" required/>
+                                        <small className="my_place">Your email</small>
+                                        <div className="invalid-feedback">Please enter the above field.</div>
+                                    </label>
+                                </div>   
+
+                                <div className="form-group">
+                                    <label>
+                                        <input type="password" id="form_password" name="password" className="my_form-control" required/>
+                                        <small className="my_place">Your password</small>
+                                        <div className="invalid-feedback">Please enter the above field.</div>
+
+                                    </label>
+                                </div>  
+
+                                <div className="form-group text-center">
+                                    <button type="submit" className="btn btn-primary mt-3 mr-5 mx-auto" >SIGN IN</button>
+                                </div>
+
+                                <div className="form-group mt-4 text-center">
+                                    <Link to="/recoverpass">Forgot password ?</Link>
+                                </div>
+
+                                <div className="form-group mt-4 text-center">
+                                    <Link to="/signup">No Account ?, Sign Up here </Link>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         )
     }
 }
+
 
