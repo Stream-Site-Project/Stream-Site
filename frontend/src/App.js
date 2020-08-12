@@ -10,8 +10,9 @@ import Navbar from './components/Navbar.component';
 import ShowMovies from './components/ShowMovie.component';
 import UserSignUp from './components/UserSignUp.component';
 import Recoverpass from './components/Recoverpass.component';
-//import userLogOut from './components/userLogOut.component';
-//<Route path="/logout" component={userLogOut} />
+import Recoveremail from './components/Recoveremail.component';
+import LoaderP from './components/Loading.component';
+import userLogOut from './components/userLogOut.component';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/playvideo" component={RenderMovie} />
         <Route path="/showmovies" component={ShowMovies} />
         <Route path="/recoverpass" component={Recoverpass} />
+        <Route path="/recoverEmail" component={Recoveremail} />
+        <Route path="/logout" component={userLogOut} />
       </div>
     </Router>
     

@@ -79,13 +79,23 @@ export default class ShowMovie extends React.Component{
             <div>
                 <input type="text" value={this.state.searchFilter} placeholder="Search Movie" onChange={this.handleSearch}/>
                 <h3>All Movies</h3>
-                {totalMovies}
+                <div className="row">
+                    {totalMovies}
+                </div>
+                
                 <br />
                 <h3>Thriller Movies</h3>
-                {thrillerMovies}
+                <div className="row">
+                    {thrillerMovies}
+                </div>
+                
                 <br />
                 <h3>Drama Movies</h3>
-                {dramaMovies}
+                <div className="row">
+                    {dramaMovies}
+                </div>
+                
+                
             </div>
         )
     }

@@ -38,6 +38,13 @@ export default class Navbar extends React.Component{
                         <Link className="nav-link" to="/logout">Log Out<span className="sr-only">(current)</span></Link>
                         :
                         ""
+
+        const watchMovie = this.state.userLoggedin 
+                        ?
+                        <Link className="nav-link" to="/showmovies">Watch Now<span className="sr-only">(current)</span></Link>
+                        :
+                        ""
+
         return(
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,13 +58,7 @@ export default class Navbar extends React.Component{
                                 {loginSignup}
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/uploadmovie">Upload Movie</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/signup">Sign Up</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/showmovies">DashBoard</Link>
+                                {watchMovie}
                             </li>
                         </ul>
                         <ul className="navbar-nav">

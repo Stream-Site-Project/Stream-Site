@@ -56,7 +56,7 @@ export default class Movie extends React.Component{
             return(
                 // here the event should be made to be generated for the entire div ,
                 // but here the event is only for the button
-                <div>
+                <div className="col-sm-3">
                     <div className="card" onClick={(event) => this.handleClick(event, this.props.movie._id)}>
                         <img className="card-img-top" src={picSrc} alt="Card image cap"/>
                         <div className="card-body">

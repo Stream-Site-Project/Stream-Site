@@ -25,4 +25,30 @@ router.route('/add').post(async (req, res) =>{
         .catch(err => res.status(400).json('Error '+ err));
 });
 
+router.route('/recoverpass').post(async (req,res) =>{
+    const email = req.body.email
+    const password = req.body.password
+
+    //Hashing Password
+    const salt = await bcrypt.genSalt(10);
+    const userPassword = await bcrypt.hash(password, salt);
+
+    const query = {userEmail: email}
+    User.findOneAndUpdate(query,{userPassword: userPassword},null,function(err,doc){
+        if(err){
+            console.log("(-)Error",err)
+            res.send({
+                "isComp":false
+            })
+        }else{
+            console.log("Success in changing the password.")
+            res.send({
+                "isComp":true
+            })
+        }
+    })
+});
+
+
+
 module.exports = router;
