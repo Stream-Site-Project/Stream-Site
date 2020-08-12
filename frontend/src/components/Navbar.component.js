@@ -8,6 +8,8 @@ export default class Navbar extends React.Component{
         this.state = {
             userLoggedin : false
         }
+
+        this.handleLogOut = this.handleLogOut.bind(this)
     }
 
     componentDidMount(){
@@ -26,6 +28,18 @@ export default class Navbar extends React.Component{
         }
     }
 
+    handleLogOut(e){
+        const cookies = new Cookies();
+        cookies.remove('userid')
+        cookies.remove('userLogged')
+        
+        this.setState({
+            userLoggedin: false
+        })
+
+        window.location = "/login"
+    }
+
     render(){
         const loginSignup = this.state.userLoggedin
                             ?
@@ -35,7 +49,7 @@ export default class Navbar extends React.Component{
         
         const logOut = this.state.userLoggedin 
                         ?
-                        <Link className="nav-link" to="/logout">Log Out<span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" onClick={this.handleLogOut} >Log Out<span className="sr-only">(current)</span></Link>
                         :
                         ""
 

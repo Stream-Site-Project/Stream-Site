@@ -6,8 +6,8 @@ import Cookies from 'universal-cookie';
 export default class UserLogOut extends React.Component{
     render(){
         const cookies = new Cookies();
-        cookies.set('userid',null)
-        cookies.set('userLogged', false)
+        cookies.remove('userid')
+        cookies.remove('userLogged')
         return(
             <Redirect to="/login"/>
         )
